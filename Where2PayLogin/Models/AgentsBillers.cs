@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Where2PayLogin.Models
 {
-    public class AgentsBillers
+    public class AgentsBillers : IdentityUser
     {
         public int AgentID { get; set; }
         public Agent Agent { get; set; }

@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Where2PayLogin.Models
 {
-    public class UsersBillerInfo
+    public class UsersBillerInfo : IdentityUser
     {
         public int ID { get; set; }
         public int UserId { get; set; }
