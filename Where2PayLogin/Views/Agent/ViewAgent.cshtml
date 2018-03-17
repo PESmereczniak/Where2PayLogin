@@ -1,0 +1,27 @@
+﻿@model Where2PayLogin.ViewModels.ViewAgentViewModel
+
+<h1>@Model.Agent.Name</h1>
+
+<table>
+    <tr>
+        <td><b>Phone Number</b></td>
+        <td>@Model.Agent.Phone</td>
+    </tr>
+    <tr>
+        <td><b>Address</b></td>
+        <td>@Model.Agent.Street1</br>@Model.Agent.Street2</br>@Model.Agent.City, @Model.Agent.State @Model.Agent.Zip</td>
+    </tr>
+    <tr>
+        <td><b>Processes Payments For</b></td>
+        <td>
+            @foreach (var agentsBiller in Model.Billers)
+            {
+            <p>@agentsBiller.Biller.Name</p>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><a asp-controller="Agent" asp-action="AddAgentsBillers" asp-route-id="@Model.Agent.ID"><b>Add a Biller</b></a></td>
+    </tr>
+</table>

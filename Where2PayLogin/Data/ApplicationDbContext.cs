@@ -10,17 +10,28 @@ namespace Where2PayLogin.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Biller> Billers { get; set; }
+        public DbSet<Agent> Agents { get; set; }
+        public DbSet<AgentsBillers> AgentsBillers { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
-            // Customize the ASP.NET Identity model and override the defaults if needed.
-            // For example, you can rename the ASP.NET Identity table names and more.
-            // Add your customizations after calling base.OnModelCreating(builder);
+            modelBuilder.Entity<AgentsBillers>()
+                .HasKey(ab => new { ab.AgentID, ab.BillerID });
+
+            modelBuilder.Entity<AgentsBillers>()
+                .HasOne(ab => ab.Agent)
+                .WithMany(b => b.AgentsBillers)
+                .HasForeignKey(ab => ab.AgentID);
+
+            modelBuilder.Entity<AgentsBillers>()
+                .HasOne(ab => ab.Biller)
+                .WithMany(a => a.AgentsBillers)
+                .HasForeignKey(ab => ab.BillerID);
         }
     }
 }

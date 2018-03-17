@@ -80,6 +80,9 @@ namespace Where2PayLogin.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<string>("LoginProvider");
 
                     b.Property<string>("ProviderKey");

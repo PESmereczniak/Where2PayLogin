@@ -1,0 +1,30 @@
+﻿@model List<Where2PayLogin.Models.Agent>
+
+<h1>Agent List</h1>
+<h4>This page is for Managing Agents</h4>
+
+@if (Model.Count == 0)
+{
+    <p><h2>No Agents yet!</h2></p>
+}
+
+<table class="table">
+
+    <tr>
+        <th>Agent</th>
+        <th>Agent ID</th>
+        <th>Agent Phone Number</th>
+    </tr>
+
+    @foreach (var agent in Model)
+    {
+        <tr>
+            <td><a asp-controller="Agent" asp-action="ViewAgent" asp-route-id=@agent.ID>@agent.Name</a></td>
+            <td>@agent.ID</td>
+            <td>@agent.Phone</td>
+        </tr>
+    }
+</table>
+
+<p><a asp-area="" asp-controller="Agent" asp-action="Add">Add Agent</a></p>
+<p><a asp-area="" asp-controller="Agent" asp-action="Remove">Remove Agent(s)</a></p>

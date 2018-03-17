@@ -1,0 +1,12 @@
+﻿<h1>@ViewBag.title</h1>
+
+<form method="post">
+    @foreach (var biller in ViewBag.Billers)
+        {
+    <input type="checkbox" name="BillerIds" id="@biller.ID" value="@biller.ID" />
+    <label for="@biller.ID">@biller.Name</label>
+    <br />
+
+        }
+    <input type="submit" value="Remove Selected Biller(s)" />
+</form>

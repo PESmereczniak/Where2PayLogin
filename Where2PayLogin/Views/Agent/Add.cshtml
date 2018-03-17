@@ -1,0 +1,54 @@
+﻿@model Where2PayLogin.ViewModels.AddAgentViewModel
+
+<h1>Add Agent Location</h1>
+
+<form asp-controller="Agent" asp-action="Add" method="post">
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input class="form-control" asp-for="Phone" />
+        <span asp-validation-for="Phone"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Street1"></label>
+        <input class="form-control" asp-for="Street1" />
+        <span asp-validation-for="Street1"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Street2"></label>
+        <input class="form-control" asp-for="Street2" />
+        <span asp-validation-for="Street2"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input class="form-control" asp-for="City" />
+        <span asp-validation-for="City"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="State"></label>
+        <input class="form-control" asp-for="State" />
+        <span asp-validation-for="State"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Zip"></label>
+        <input class="form-control" asp-for="Zip" />
+        <span asp-validation-for="Zip"></span>
+    </div>
+
+    <!--
+    <div class="form-group">
+        <label asp-for="AgentsBillers"></label>
+        @*@foreach (var biller in Model.Billers)*@
+        {
+        <input class="form-control" type="checkbox" asp-for="AgentsBillers" value="biller.ID" checked />
+        <span asp-validation-for="AgentsBillers"></span>
+        }
+    </div>
+    -->
+    <input type="submit" value="Add New Agent" />
+</form>

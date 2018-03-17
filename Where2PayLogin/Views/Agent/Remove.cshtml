@@ -1,0 +1,14 @@
+﻿@model List<Where2PayLogin.Models.Agent>
+
+<h1>@ViewBag.title</h1>
+
+<form method="post">
+    @foreach (var agent in ViewBag.agents)
+    {
+    <input type="checkbox" name="AgentIds" id="@agent.ID" value="@agent.ID" />
+    <label for="@agent.ID">@agent.Name, Agent ID: @agent.ID</label>
+    <br />
+
+    }
+    <input type="submit" value="Remove Selected Agent(s)" />
+</form>
