@@ -16,7 +16,7 @@ namespace Where2PayLogin.Data
         public DbSet<AgentsBillers> AgentsBillers { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<UsersBillers> UsersBillers { get; set; }
-        public DbSet<UsersBillerInfo> UsersBillerInfo { get; set; }
+        //public DbSet<UsersBillerInfo> UsersBillerInfo { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
