@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Where2PayLogin.Models
 {
-    public class AgentsBillers : IdentityUser
+    public class AgentsBillers
     {
         public int AgentID { get; set; }
         public Agent Agent { get; set; }

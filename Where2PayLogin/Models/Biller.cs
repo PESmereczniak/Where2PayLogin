@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Where2PayLogin.Models
 {
-    public class Biller : IdentityUser
+    public class Biller
     {
         public int ID { get; set; }
         public string Name { get; set; }

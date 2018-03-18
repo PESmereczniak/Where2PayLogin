@@ -28,7 +28,6 @@ namespace Where2PayLogin.Data
 
             modelBuilder.Entity<Agent>().HasKey(m => m.ID);
             modelBuilder.Entity<Biller>().HasKey(m => m.ID);
-            modelBuilder.Entity<ApplicationUser>().HasKey(m => m.ID);
             modelBuilder.Entity<UsersBillerInfo>().HasKey(m => m.ID);
 
             modelBuilder.Entity<AgentsBillers>()
