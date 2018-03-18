@@ -41,12 +41,6 @@ namespace Where2PayLogin.Data
                 .HasOne(ab => ab.Biller)
                 .WithMany(a => a.AgentsBillers)
                 .HasForeignKey(ab => ab.BillerID);
-
-            //modelBuilder.Ignore<IdentityUserLogin<string>>();
-            //modelBuilder.Ignore<IdentityUserRole<string>>();
-            //modelBuilder.Ignore<IdentityUserClaim<string>>();
-            //modelBuilder.Ignore<IdentityUserToken<string>>();
-            //modelBuilder.Ignore<IdentityUser<string>>();
         }
     }
 }
