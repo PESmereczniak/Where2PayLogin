@@ -95,7 +95,7 @@ namespace Where2PayLogin
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Agent}/{action=Index}/{id?}");
+                    template: "{controller=Biller}/{action=BillerList}");
             });
         }
     }

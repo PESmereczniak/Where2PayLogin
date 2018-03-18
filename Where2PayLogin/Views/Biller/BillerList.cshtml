@@ -1,0 +1,12 @@
+﻿@model List<Where2PayLogin.Models.Biller>
+<h1>Where2Pay</h1>
+<h3>Keep Track of you payments and account numbers by 
+    <a asp-area="" asp-controller="Account" asp-action="Register">signing up</a> for a <b>Free</b> Account!</h3>
+
+<h3>Available Billers</h3>
+<ol>
+    @foreach (var biller in Model)
+    {
+        <li>@biller.Name</li>
+    }
+</ol>

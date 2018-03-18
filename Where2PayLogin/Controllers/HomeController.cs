@@ -9,13 +9,14 @@ using Where2PayLogin.Models;
 
 namespace Where2PayLogin.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-        [Authorize]
+        
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

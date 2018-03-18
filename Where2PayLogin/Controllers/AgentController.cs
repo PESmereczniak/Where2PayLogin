@@ -9,9 +9,11 @@ using Where2PayLogin.ViewModels;
 using Where2PayLogin.Data;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Where2PayLogin.Controllers
 {
+    [Authorize]
     public class AgentController : Controller
     {
         private readonly ApplicationDbContext context;
@@ -20,6 +22,7 @@ namespace Where2PayLogin.Controllers
         {
             context = dbContext;
         }
+
         public IActionResult Index()
         {
             List<Agent> agents = context.Agents.ToList();
@@ -93,8 +96,8 @@ namespace Where2PayLogin.Controllers
                 var billerID = agentBillerViewModel.BillerID;
 
                 IList<AgentsBillers> existingItems = context.AgentsBillers
-    .Where(ab => ab.AgentID == agentID)
-    .Where(ab => ab.BillerID == billerID).ToList();
+                .Where(ab => ab.AgentID == agentID)
+                .Where(ab => ab.BillerID == billerID).ToList();
 
                 if (existingItems.Count == 0)
                 {

@@ -1,0 +1,32 @@
+﻿@model List<Where2PayLogin.Models.UsersBillerInfo>
+
+<h1>Your Billers</h1>
+<h4>This page is for Managing a Users Biller List</h4>
+
+@if (Model.Count == 0)
+{
+    <p><h2>No Billers yet!</h2></p>
+}
+
+<table class="table">
+
+    <tr>
+        <th>Biller</th>
+        <th>Description</th>
+        <th>Account Number</th>
+        <th>Where2Pay</th>
+    </tr>
+
+    @foreach (var biller in Model)
+    {
+        <tr>
+            <td>@biller.BillerName</td>
+            <td>@biller.BillerDescription</td>
+            <td>@biller.UsersAccountNumber</td>
+            <td>link to biller's page here</td>
+        </tr>
+    }
+</table>
+
+<p><a asp-area="" asp-controller="User" asp-action="Add">Add Biller</a></p>
+<p><a asp-area="" asp-controller="User" asp-action="Remove">Remove Biller(s)</a></p>

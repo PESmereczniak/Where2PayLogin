@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Where2PayLogin.Data;
@@ -11,6 +12,7 @@ using Where2PayLogin.ViewModels;
 
 namespace Where2PayLogin.Controllers
 {
+    [Authorize]
     public class BillerController : Controller
     {
         private readonly ApplicationDbContext context;
@@ -55,6 +57,14 @@ namespace Where2PayLogin.Controllers
                 return Redirect("/Biller");
             }
             return View(addBillerViewModel);
+        }
+
+        [AllowAnonymous]
+        public IActionResult BillerList()
+        {
+            List<Biller> billers = context.Billers.ToList();
+
+            return View(billers);
         }
 
         public IActionResult ViewBiller(int id)

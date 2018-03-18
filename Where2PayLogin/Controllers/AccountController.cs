@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Where2PayLogin.Data;
 using Where2PayLogin.Models;
 using Where2PayLogin.Models.AccountViewModels;
 using Where2PayLogin.Services;
@@ -436,7 +437,6 @@ namespace Where2PayLogin.Controllers
         {
             return View();
         }
-
         #region Helpers
 
         private void AddErrors(IdentityResult result)
