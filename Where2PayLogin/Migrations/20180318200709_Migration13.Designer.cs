@@ -11,8 +11,8 @@ using Where2PayLogin.Data;
 namespace Where2PayLogin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180318020522_Migration9")]
-    partial class Migration9
+    [Migration("20180318200709_Migration13")]
+    partial class Migration13
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -166,7 +166,7 @@ namespace Where2PayLogin.Migrations
                     b.ToTable("AgentsBillers");
                 });
 
-            modelBuilder.Entity("Where2PayLogin.Models.ApplicationUser", b =>
+            modelBuilder.Entity("Where2PayLogin.Models.AspNetUsers", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -242,6 +242,8 @@ namespace Where2PayLogin.Migrations
 
                     b.Property<string>("BillerDescription");
 
+                    b.Property<int>("BillerID");
+
                     b.Property<string>("BillerName");
 
                     b.Property<int>("UserId");
@@ -263,7 +265,7 @@ namespace Where2PayLogin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Where2PayLogin.Models.ApplicationUser")
+                    b.HasOne("Where2PayLogin.Models.AspNetUsers")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -271,7 +273,7 @@ namespace Where2PayLogin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Where2PayLogin.Models.ApplicationUser")
+                    b.HasOne("Where2PayLogin.Models.AspNetUsers")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -284,7 +286,7 @@ namespace Where2PayLogin.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Where2PayLogin.Models.ApplicationUser")
+                    b.HasOne("Where2PayLogin.Models.AspNetUsers")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -292,7 +294,7 @@ namespace Where2PayLogin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Where2PayLogin.Models.ApplicationUser")
+                    b.HasOne("Where2PayLogin.Models.AspNetUsers")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

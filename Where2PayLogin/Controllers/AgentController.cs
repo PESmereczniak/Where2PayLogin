@@ -55,7 +55,7 @@ namespace Where2PayLogin.Controllers
                 context.Agents.Add(newAgent);
                 context.SaveChanges();
 
-                return Redirect("/Agent");
+                return Redirect("/Agent/Index/");
 
             }
             return View(addAgentViewModel);
@@ -110,7 +110,7 @@ namespace Where2PayLogin.Controllers
                     context.SaveChanges();
                 }
 
-                return Redirect(string.Format("/Agent/ViewAgent/{0}", agentBillerViewModel.AgentID));
+                return Redirect(string.Format("/Agent/ViewAgent?id={0}", agentBillerViewModel.AgentID));
             }
 
             return View(agentBillerViewModel);

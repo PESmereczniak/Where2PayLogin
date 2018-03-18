@@ -34,10 +34,11 @@ namespace Where2PayLogin.Controllers
         }
 
         //AFTER INDEX WORKS, INCLUDE ADD FUNCTION
-        public IActionResult Add()
+        public IActionResult Add(int id)
         {
-            AddUsersBillerViewModel addUsersBillerViewModel = new AddUsersBillerViewModel();
-            return View(addUsersBillerViewModel);
+            ApplicationUser user = context.Users.Single(u => u.Id == id.ToString());
+            List<Biller> billers = context.Billers.ToList();
+            return View(new AddUsersBillerViewModel(user, billers)); ;
         }
 
         // GET: /<controller>/

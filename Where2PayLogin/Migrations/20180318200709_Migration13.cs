@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Where2PayLogin.Migrations
 {
-    public partial class Migration9 : Migration
+    public partial class Migration13 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -90,6 +90,7 @@ namespace Where2PayLogin.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     BillerDescription = table.Column<string>(nullable: true),
+                    BillerID = table.Column<int>(nullable: false),
                     BillerName = table.Column<string>(nullable: true),
                     UserId = table.Column<int>(nullable: false),
                     UsersAccountNumber = table.Column<string>(nullable: true)

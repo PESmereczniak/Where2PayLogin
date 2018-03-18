@@ -54,7 +54,7 @@ namespace Where2PayLogin.Controllers
                 //commits changes to db
                 context.SaveChanges();
 
-                return Redirect("/Biller");
+                return Redirect("/Biller/Index");
             }
             return View(addBillerViewModel);
         }
