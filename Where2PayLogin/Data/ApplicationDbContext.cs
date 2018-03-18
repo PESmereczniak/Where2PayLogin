@@ -24,6 +24,8 @@ namespace Where2PayLogin.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Agent>().HasKey(m => m.ID);
             modelBuilder.Entity<Biller>().HasKey(m => m.ID);
             modelBuilder.Entity<ApplicationUser>().HasKey(m => m.ID);
@@ -47,7 +49,6 @@ namespace Where2PayLogin.Data
             modelBuilder.Ignore<IdentityUserClaim<string>>();
             modelBuilder.Ignore<IdentityUserToken<string>>();
             modelBuilder.Ignore<IdentityUser<string>>();
-            modelBuilder.Ignore<ApplicationUser>();
         }
     }
 }
