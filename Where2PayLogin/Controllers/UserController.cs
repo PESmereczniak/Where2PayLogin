@@ -24,25 +24,21 @@ namespace Where2PayLogin.Controllers
 
         public IActionResult Index()
         {
-            //UserIndexViewModel userIndexViewModel = new UserIndexViewModel();
-            //return View(userIndexViewModel);
-
             //WILL NEED TO LIMIT INFO DISPLAYED TO CURRENT, LOGGED IN USER
             //MAYBE DONE IN VIEW MODEL?
             //usersBillers = usersBillerInfo
             //where (usersBillerInfo.UserId == thisUser.ID)
-            //return View(usersBillers)
 
             List<UsersBillerInfo> usersBillerInfo = context.UsersBillerInfo.ToList();
             return View(usersBillerInfo);
         }
 
         //AFTER INDEX WORKS, INCLUDE ADD FUNCTION
-        //public IActionResult Add()
-        //{
-        //    AddUsersBillerViewModel addUsersBillerViewModel = new AddUsersBillerViewModel();
-        //    return View(addUsersBillerViewModel);
-        //}
+        public IActionResult Add()
+        {
+            AddUsersBillerViewModel addUsersBillerViewModel = new AddUsersBillerViewModel();
+            return View(addUsersBillerViewModel);
+        }
 
         // GET: /<controller>/
         //[HttpPost]
