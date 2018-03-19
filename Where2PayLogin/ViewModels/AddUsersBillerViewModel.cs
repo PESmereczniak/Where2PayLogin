@@ -14,7 +14,7 @@ namespace Where2PayLogin.ViewModels
         public List<SelectListItem> AvailableBillers { get; set; }
 
         public int BillerID { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public AddUsersBillerViewModel() { }
 

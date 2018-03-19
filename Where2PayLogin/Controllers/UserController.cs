@@ -1,26 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Where2PayLogin.Data;
 using Where2PayLogin.Models;
 using Where2PayLogin.ViewModels;
 
+
 namespace Where2PayLogin.Controllers
 {
     [Authorize]
+    [Route("[controller]/[action]")]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext context;
-
-        public UserController(ApplicationDbContext dbContext)
-        {
-            context = dbContext;
-        }
 
         public IActionResult Index()
         {
@@ -33,14 +30,48 @@ namespace Where2PayLogin.Controllers
             return View(usersBillerInfo);
         }
 
-        //AFTER INDEX WORKS, INCLUDE ADD FUNCTION
-        public IActionResult Add(int id)
+        public UserController(ApplicationDbContext dbContext)
         {
-            ApplicationUser user = context.Users.Single(u => u.Id == id.ToString());
-            List<Biller> billers = context.Billers.ToList();
-            return View(new AddUsersBillerViewModel(user, billers)); ;
+            context = dbContext;
         }
 
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public UserController(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
+        //render add user's biller page
+        [HttpGet]
+        public async Task<IActionResult> Add()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            List<Biller> billers = context.Billers.ToList();
+            var UserId = user.Id;
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            //var model = new AddUsersBillerViewModel
+            //{
+            //    UserId = user.Id
+            //    AvailableBillers = 
+            //};
+
+            return View(UserId, billers);
+        }
+
+        //render add user's biller page
+        //public IActionResult Add(int id)
+        //{
+        //    ClaimsPrincipal currentUser = this.User;
+        //    string userId = currentUser.GetUserId();
+        //    List<Biller> billers = context.Billers.ToList();
+        //    return View(new AddUsersBillerViewModel(userId, billers));
+        //}
+        
         // GET: /<controller>/
         //[HttpPost]
         //public IActionResult Add(AddUsersBillerViewModel addUsersBillerViewModel)
