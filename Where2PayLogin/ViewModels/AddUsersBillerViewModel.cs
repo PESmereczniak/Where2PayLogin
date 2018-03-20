@@ -14,7 +14,7 @@ namespace Where2PayLogin.ViewModels
         public List<SelectListItem> AvailableBillers { get; set; }
 
         public int BillerID { get; set; }
-        public string UserId { get; set; }
+        public string UserID { get; set; }
 
         public AddUsersBillerViewModel() { }
 
@@ -40,7 +40,5 @@ namespace Where2PayLogin.ViewModels
         [Required(ErrorMessage = "Account Number is required")]
         [Display(Name = "Account Number: ")]
         public string UsersAccountNumber { get; set; }
-
-        public string UserID { get; set; }
     }
 }

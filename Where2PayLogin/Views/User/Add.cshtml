@@ -4,7 +4,7 @@
 
 <form asp-controller="User" asp-action="Add" method="post">
 
-    <input type="hidden" name="UserId" value="@Model.UserId" />
+    <input type="hidden" name="UserId" value="@Model.User.Id" />
     @*ALLOWS MENU ID TO BE SUBMITTED AS FORM DATA, WITHOUT RENDERING*@
     @*TYPE=HIDDEN, SO USER DOES NOT SEE, BUT IS USED IN PROCESSING*@
 
