@@ -24,15 +24,28 @@ namespace Where2PayLogin.Controllers
         //CURRENTLY SHOWS ALL USERS' BILLER'S INFO
         public async Task<IActionResult> Index()
         {
+            //var user = await _userManager.GetUserAsync(User);
+            //List<UsersBillerInfo> usersBillers = context.UsersBillerInfo.ToList();
+            //List<Biller> billers = context.Billers.ToList();
+            //NEW CODE
             var user = await _userManager.GetUserAsync(User);
-            List<UsersBillerInfo> usersBillers = context.UsersBillerInfo.ToList();
             List<Biller> billers = context.Billers.ToList();
+            List<UsersBillerInfo> availableUsersBillers = context.UsersBillerInfo.ToList();
+            List<UsersBillerInfo> thisUsersBillers = new List<UsersBillerInfo>();
+            foreach (var userBiller in availableUsersBillers)
+            {
+                if (userBiller.UserId == user.Id)
+                {
+                    thisUsersBillers.Add(userBiller);
+                }
+            }
+            //END NEW CODE
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            return View(new ViewUsersBillersViewModel(user, usersBillers, billers));
+            return View(new ViewUsersBillersViewModel(user, thisUsersBillers, billers));
         }
 
         public UserController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
@@ -79,11 +92,21 @@ namespace Where2PayLogin.Controllers
             return View(addUsersBillerViewModel);
         }
 
-        public IActionResult RemoveUsersBiller()
+        public async Task<IActionResult> RemoveUsersBiller()
         {
-            ViewBag.title = "Remove Biller";
-            ViewBag.billers = context.UsersBillerInfo.ToList();
+            var user = await _userManager.GetUserAsync(User);
+            List<UsersBillerInfo> availableUsersBillers = context.UsersBillerInfo.ToList();
+            List<UsersBillerInfo> thisUsersBillers = new List<UsersBillerInfo>();
+            foreach (var userBiller in availableUsersBillers)
+            {
+                if (userBiller.UserId == user.Id)
+                {
+                    thisUsersBillers.Add(userBiller);
+                }
+            }
 
+            ViewBag.billers = thisUsersBillers;
+            
             return View();
         }
 
