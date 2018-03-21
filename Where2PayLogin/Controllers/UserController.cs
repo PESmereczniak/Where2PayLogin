@@ -87,6 +87,20 @@ namespace Where2PayLogin.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult RemoveUsersBiller(int[] usersBillerIds)
+        {
+            foreach (int usersBillerId in usersBillerIds)
+            {
+                UsersBillerInfo removeUsersBiller = context.UsersBillerInfo.Single(ub => ub.ID == usersBillerId);
+                context.UsersBillerInfo.Remove(removeUsersBiller);
+            }
+
+            context.SaveChanges();
+
+            return Redirect("/User/Index");
+        }
+
         //ADMIN LEVEL VIEW USERS (C/P FROM VIEW AGENT)
         //public IActionResult ViewAgent(int id)
         //{

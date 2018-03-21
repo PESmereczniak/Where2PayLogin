@@ -5,7 +5,7 @@
 <form method="post">
     @foreach (var biller in ViewBag.billers)
     {
-    <input type="checkbox" name="AgentIds" id="@biller.ID" value="@biller.ID" />
+    <input type="checkbox" name="usersBillerIds" id="@biller.ID" value="@biller.ID" />
     <label for="@biller.ID">@biller.BillerName - @biller.BillerDescription</label>
     <br />
 

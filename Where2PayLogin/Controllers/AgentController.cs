@@ -129,8 +129,8 @@ namespace Where2PayLogin.Controllers
         {
             foreach (int agentId in agentIds)
             {
-                Agent removeCheese = context.Agents.Single(c => c.ID == agentId);
-                context.Agents.Remove(removeCheese);
+                Agent removeAgent = context.Agents.Single(c => c.ID == agentId);
+                context.Agents.Remove(removeAgent);
             }
 
             context.SaveChanges();
