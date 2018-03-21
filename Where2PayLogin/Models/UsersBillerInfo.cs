@@ -9,7 +9,7 @@ namespace Where2PayLogin.Models
     public class UsersBillerInfo
     {
         public int ID { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int BillerID { get; set; }
         public string BillerName { get; set; }
         public string BillerDescription { get; set; }

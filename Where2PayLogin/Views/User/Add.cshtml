@@ -4,15 +4,15 @@
 
 <form asp-controller="User" asp-action="Add" method="post">
 
-    <input type="hidden" name="UserId" value="@Model.User.Id" />
+    <input type="hidden" name="UserId" asp-for="UserID" value="@Model.User.Id" />
     @*ALLOWS MENU ID TO BE SUBMITTED AS FORM DATA, WITHOUT RENDERING*@
     @*TYPE=HIDDEN, SO USER DOES NOT SEE, BUT IS USED IN PROCESSING*@
 
     <div class="form-group">
-        <label asp-for="BillerID"></label>
-        <select asp-for="BillerID" asp-items="Model.AvailableBillers"></select>
+        <label asp-for="BillerName">Select a Biller to Add</label>
+        <select asp-for="BillerName" asp-items="Model.AvailableBillers"></select>
         @*RENDERS DROPDOWN LIST FROM AGENTCONTROLLER.ADDITEM RENDERING ACTION*@
-        <span asp-validation-for="BillerID"></span>
+        <span asp-validation-for="BillerName"></span>
     </div>
 
     <div class="form-group">

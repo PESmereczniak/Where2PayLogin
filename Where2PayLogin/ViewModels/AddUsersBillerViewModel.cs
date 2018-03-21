@@ -14,9 +14,12 @@ namespace Where2PayLogin.ViewModels
         public List<SelectListItem> AvailableBillers { get; set; }
 
         public int BillerID { get; set; }
-        public string UserID { get; set; }
 
+        public string BillerName { get; set; }
+        
         public AddUsersBillerViewModel() { }
+
+        public string UserID { get; set; }
 
         public AddUsersBillerViewModel(ApplicationUser user, IEnumerable<Biller> billers)
         {
@@ -26,7 +29,7 @@ namespace Where2PayLogin.ViewModels
             {
                 AvailableBillers.Add(new SelectListItem
                 {
-                    Value = biller.ID.ToString(),//TOSTRING, BECAUSE ID IS AN INT
+                    Value = biller.Name,
                     Text = biller.Name
                 });
             }

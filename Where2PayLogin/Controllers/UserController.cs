@@ -14,22 +14,23 @@ using Where2PayLogin.ViewModels;
 namespace Where2PayLogin.Controllers
 {
     [Authorize]
-    [Route("[controller]/[action]")]
     public class UserController : Controller
     {
         private readonly ApplicationDbContext context;
 
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            //WILL NEED TO LIMIT INFO DISPLAYED TO CURRENT, LOGGED IN USER
-            //MAYBE DONE IN VIEW MODEL?
-            //usersBillers = usersBillerInfo
-            //where (usersBillerInfo.UserId == thisUser.ID)
+            var user = await _userManager.GetUserAsync(User);
+            List<UsersBillerInfo> usersBillers = context.UsersBillerInfo.ToList();
+            List<Biller> billers = context.Billers.ToList();
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
 
-            List<UsersBillerInfo> usersBillerInfo = context.UsersBillerInfo.ToList();
-            return View(usersBillerInfo);
+            return View(new ViewUsersBillersViewModel(user, usersBillers, billers));
         }
 
         public UserController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager)
@@ -37,19 +38,12 @@ namespace Where2PayLogin.Controllers
             context = dbContext;
             _userManager = userManager;
         }
-        
-        //public UserController(UserManager<ApplicationUser> userManager)
-        //{
-        //    _userManager = userManager;
-        //}
 
-        //render add user's biller page
-        [HttpGet]
+        //RENDER add user's biller page
         public async Task<IActionResult> Add()
         {
             var user = await _userManager.GetUserAsync(User);
             List<Biller> billers = context.Billers.ToList();
-            //var UserID = user.Id;
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -58,29 +52,30 @@ namespace Where2PayLogin.Controllers
             return View(new AddUsersBillerViewModel(user, billers));
         }
 
-        // GET: /<controller>/
-        //[HttpPost]
-        //public IActionResult Add(AddUsersBillerViewModel addUsersBillerViewModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        UsersBillerInfo newUsersBillerInfo = new UsersBillerInfo
-        //        {
-        //            UserId = addUsersBillerViewModel.UserId,
-        //            BillerID = addUsersBillerViewModel.BillerID.ToString(),
-        //            BillerDescription = addUsersBillerViewModel.BillerDescription,
-        //            UsersAccountNumber = addUsersBillerViewModel.UsersAccountNumber
-        //        };
+        //SUBMIT add user's biller page
+        [HttpPost]
+        public IActionResult Add(AddUsersBillerViewModel addUsersBillerViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                UsersBillerInfo newUsersBillerInfo = new UsersBillerInfo
+                {
+                    UserId = addUsersBillerViewModel.UserID,
+                    BillerName = addUsersBillerViewModel.BillerName,
+                    BillerID = addUsersBillerViewModel.BillerID,
+                    BillerDescription = addUsersBillerViewModel.BillerDescription,
+                    UsersAccountNumber = addUsersBillerViewModel.UsersAccountNumber
+                };
 
-        //        //creates model in database
-        //        context.UsersBillerInfo.Add(newUsersBillerInfo);
-        //        //commits changes to db
-        //        context.SaveChanges();
+                //creates model in database
+                context.UsersBillerInfo.Add(newUsersBillerInfo);
+                //commits changes to db
+                context.SaveChanges();
 
-        //        return Redirect("/User/Index");
-        //    }
-        //    return View(addUsersBillerViewModel);
-        //}
+                return Redirect("/User/Index");
+            }
+            return View(addUsersBillerViewModel);
+        }
 
         //VIEW BILLER FUNCTIONS NOT NECESSARY IN THIS CONTEXT
         //MAY BE ABLE TO USE SOME OF CODE FOR USER BILLER INDEX?

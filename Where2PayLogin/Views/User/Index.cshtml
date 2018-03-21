@@ -1,9 +1,9 @@
-﻿@model List<Where2PayLogin.Models.UsersBillerInfo>
+﻿@model Where2PayLogin.ViewModels.ViewUsersBillersViewModel
 
 <h1>Your Billers</h1>
 <h4>This page is for Managing a Users Biller List</h4>
 
-@if (Model.Count == 0)
+@if (Model.UsersBillerInfo.Count == 0)
 {
     <p><h2>No Billers yet!</h2></p>
 }
@@ -17,12 +17,12 @@
         <th>Where2Pay</th>
     </tr>
 
-    @foreach (var biller in Model)
+    @foreach (var userBiller in Model.UsersBillerInfo)
     {
         <tr>
-            <td>@biller.BillerName</td>
-            <td>@biller.BillerDescription</td>
-            <td>@biller.UsersAccountNumber</td>
+            <td>@userBiller.BillerName</td>
+            <td>@userBiller.BillerDescription</td>
+            <td>@userBiller.UsersAccountNumber</td>
             <td>WHERE2PAY BUTTON</td>
         </tr>
     }
