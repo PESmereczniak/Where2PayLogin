@@ -1,0 +1,14 @@
+﻿@model List<Where2PayLogin.Models.UsersBillerInfo>
+
+<h1>@ViewBag.title</h1>
+
+<form method="post">
+    @foreach (var biller in ViewBag.billers)
+    {
+    <input type="checkbox" name="AgentIds" id="@biller.ID" value="@biller.ID" />
+    <label for="@biller.ID">@biller.BillerName - @biller.BillerDescription</label>
+    <br />
+
+    }
+    <input type="submit" value="Remove Selected Biller(s)" />
+</form>

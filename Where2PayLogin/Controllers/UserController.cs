@@ -20,6 +20,8 @@ namespace Where2PayLogin.Controllers
 
         private readonly UserManager<ApplicationUser> _userManager;
 
+        //VIEW INDIVIDUAL USER'S BILLER'S INFO
+        //CURRENTLY SHOWS ALL USERS' BILLER'S INFO
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -77,28 +79,35 @@ namespace Where2PayLogin.Controllers
             return View(addUsersBillerViewModel);
         }
 
-        //VIEW BILLER FUNCTIONS NOT NECESSARY IN THIS CONTEXT
-        //MAY BE ABLE TO USE SOME OF CODE FOR USER BILLER INDEX?
-        //public IActionResult ViewBiller(int id)
-        //{
-        //    Biller biller = context.Billers.Single(b => b.ID == id);
+        public IActionResult RemoveUsersBiller()
+        {
+            ViewBag.title = "Remove Biller";
+            ViewBag.billers = context.UsersBillerInfo.ToList();
 
-        //    List<AgentsBillers> billersAgents = context
+            return View();
+        }
+
+        //ADMIN LEVEL VIEW USERS (C/P FROM VIEW AGENT)
+        //public IActionResult ViewAgent(int id)
+        //{
+        //    List<AgentsBillers> agentsBillers = context
         //        .AgentsBillers
-        //        .Include(billersAgent => billersAgent.Agent)
-        //        .Where(ba => ba.BillerID == id)
+        //        .Include(agentsBiller => agentsBiller.Biller)
+        //        .Where(ab => ab.AgentID == id)
         //        .ToList();
 
-        //    ViewBillerViewModel viewModel = new ViewBillerViewModel
+        //    Agent agent = context.Agents.Single(a => a.ID == id);
+
+        //    ViewAgentViewModel viewModel = new ViewAgentViewModel
         //    {
-        //        Biller = biller,
-        //        Agents = billersAgents
+        //        Agent = agent,
+        //        Billers = agentsBillers
         //    };
 
         //    return View(viewModel);
         //}
 
-        //CREATE USER REMOVAL LATER - NOT NECESSARY FOR CURRENT DEMONSTRATION
+        //ADMIN LEVEL USER REMOVAL - PAGE RENDER
         //public IActionResult Remove()
         //{
         //    ViewBag.title = "Remove User";
@@ -107,6 +116,7 @@ namespace Where2PayLogin.Controllers
         //    return View();
         //}
 
+        //ADMIN LEVEL USER REMOVAL - REMOVAL FUNCTIONS
         //[HttpPost]
         //public IActionResult Remove(int[] userIds)
         //{
