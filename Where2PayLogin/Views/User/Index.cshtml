@@ -23,7 +23,7 @@
             <td>@userBiller.BillerName</td>
             <td>@userBiller.BillerDescription</td>
             <td>@userBiller.UsersAccountNumber</td>
-            <td>WHERE2PAY BUTTON</td>
+            <td><a asp-controller="Biller" asp-action="ViewBiller" asp-route-id=@userBiller.BillerID>Where2Pay @userBiller.BillerName</a></td>
         </tr>
     }
 </table>

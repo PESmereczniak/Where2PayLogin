@@ -20,7 +20,7 @@
         <td>
             @foreach (var billersAgent in Model.Agents)
             {
-            <p>@billersAgent.Agent.Name</p>
+            <p><a asp-controller="Agent" asp-action="ViewAgent" asp-route-id=@billersAgent.AgentID>@billersAgent.Agent.Name</a></p>
             }
         </td>
     </tr>

@@ -25,7 +25,6 @@ namespace Where2PayLogin.Controllers
         public IActionResult Index()
         {
             List<Biller> billers = context.Billers.ToList();
-
             return View(billers);
         }
 

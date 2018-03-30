@@ -21,13 +21,8 @@ namespace Where2PayLogin.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
 
         //VIEW INDIVIDUAL USER'S BILLER'S INFO
-        //CURRENTLY SHOWS ALL USERS' BILLER'S INFO
         public async Task<IActionResult> Index()
         {
-            //var user = await _userManager.GetUserAsync(User);
-            //List<UsersBillerInfo> usersBillers = context.UsersBillerInfo.ToList();
-            //List<Biller> billers = context.Billers.ToList();
-            //NEW CODE
             var user = await _userManager.GetUserAsync(User);
             List<Biller> billers = context.Billers.ToList();
             List<UsersBillerInfo> availableUsersBillers = context.UsersBillerInfo.ToList();
@@ -39,7 +34,6 @@ namespace Where2PayLogin.Controllers
                     thisUsersBillers.Add(userBiller);
                 }
             }
-            //END NEW CODE
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -71,8 +65,18 @@ namespace Where2PayLogin.Controllers
         [HttpPost]
         public IActionResult Add(AddUsersBillerViewModel addUsersBillerViewModel)
         {
+            List<Biller> billers = context.Billers.ToList();
+
             if (ModelState.IsValid)
             {
+                foreach (var biller in billers)
+                {
+                    if (biller.Name == addUsersBillerViewModel.BillerName)
+                    {
+                        addUsersBillerViewModel.BillerID = biller.ID;
+                    }
+                }
+
                 UsersBillerInfo newUsersBillerInfo = new UsersBillerInfo
                 {
                     UserId = addUsersBillerViewModel.UserID,

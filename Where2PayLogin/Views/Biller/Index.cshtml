@@ -11,17 +11,17 @@
 <table class="table">
 
     <tr>
-        <th>Billers</th>
-        <th>Phone Number</th>
-        <th>Available Agents</th>
+        <th>Biller</th>
+        <th>Customer Service Phone Number</th>
+        <th></th>
     </tr>
 
     @foreach (var biller in Model)
     {
         <tr>
-            <td><a asp-controller="Biller" asp-action="ViewBiller" asp-route-id=@biller.ID>@biller.Name</a></td>
+            <td>@biller.Name</td>
             <td>@biller.Phone</td>
-            <td>This is where the list of agents will go</td>
+            <td><a asp-controller="Biller" asp-action="ViewBiller" asp-route-id=@biller.ID>View @biller.Name Agents</a></td>
         </tr>
     }
 </table>
